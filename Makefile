@@ -37,14 +37,6 @@ macos: clean prepare $(KERNEL_BIN)
 		-nographic \
 		-d in_asm,int 2> $(QEMU_LOG)
 
-linux: clean prepare $(KERNEL_BIN)
-	qemu-system-aarch64 \
-		-M virt \
-		-cpu cortex-a53 \
-		-m 1024 \
-		-kernel $(KERNEL_BIN) \
-		-display default
-
 prepare:
 	@mkdir -p $(BUILD)
 	@mkdir -p $(LOG)
@@ -64,5 +56,13 @@ $(KERNEL_BIN): $(KERNEL_ELF)
 	$(OBJCOPY_MAC) -O binary $(KERNEL_ELF) $(KERNEL_BIN)
 
 clean:
+	rm -rf $(BUILD)/*.o
+	rm -rf $(BUILD)/*.elf
+	rm -rf $(LOG)
+
+remove:
 	rm -rf $(BUILD)
 	rm -rf $(LOG)
+
+
+
