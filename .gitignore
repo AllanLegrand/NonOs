@@ -4,3 +4,6 @@ zig-out/*
 *.bin
 *.o
 *.elf
+*.log
+log/*
+build/*
